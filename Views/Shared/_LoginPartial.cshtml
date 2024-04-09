@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Eco_Tanger.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+            @{
+                // Obtenir le nom d'utilisateur actuel
+                string userName = UserManager.GetUserName(User);
+
+                // Extraire le prénom
+                string[] nameParts = userName.Split('@');
+                string firstName = nameParts[0];
+            }
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="text-decoration: underline; color: black;">@firstName</a>
+
+        
+    </li>
+    <li class="nav-item">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        
+            <a class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="login" asp-area="Identity" asp-page="/Account/Login">Login<i class="fa fa-arrow-right ms-3"></i></a>
+    </li>
+}
+</ul>

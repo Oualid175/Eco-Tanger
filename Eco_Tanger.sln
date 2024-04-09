@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eco_Tanger", "Eco_Tanger.csproj", "{1B945A44-3956-431A-9552-547853F9B9E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B945A44-3956-431A-9552-547853F9B9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B945A44-3956-431A-9552-547853F9B9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B945A44-3956-431A-9552-547853F9B9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B945A44-3956-431A-9552-547853F9B9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00D646F2-8EE7-4C65-86B2-D2A9F93C64FC}
+	EndGlobalSection
+EndGlobal
