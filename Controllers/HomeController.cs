@@ -32,6 +32,10 @@ namespace Eco_Tanger.Controllers
         {
             return View();
         }
+        public ActionResult Map()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
