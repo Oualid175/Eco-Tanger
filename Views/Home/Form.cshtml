@@ -86,20 +86,34 @@
     <h1>Environmental Issue Report</h1>
     <form id="issueForm">
         <label for="location">Location:</label>
+        <input type="hidden" id="location" name="location" required>
         <select id="location" name="location" required>
             <option value="">Select a location</option>
-            <option value="Downtown Tangier">Downtown Tangier</option>
-            <option value="Port of Tangier-Med">Port of Tangier-Med</option>
-            <option value="Tangier Beach">Tangier Beach</option>
-            <option value="Tangier City Mall">Tangier City Mall</option>
-            <option value="Tangier American School">Tangier American School</option>
-            <option value="Tangier Corniche">Tangier Corniche</option>
-            <option value="Mendoubia Gardens">Mendoubia Gardens</option>
-            <option value="Tangier Municipal Beach">Tangier Municipal Beach</option>
-            <option value="Grand Stade de Tanger">Grand Stade de Tanger</option>
-            <option value="Tangier Science School">Tangier Science School</option>>
-        </select>
-
+            <option value="Boukhalef">Boukhalef</option>
+            <option value="Jbila">Jbila</option>
+            <option value="Cap Spartel">Cap Spartel</option>
+            <option value="Achakkar">Achakkar</option>
+            <option value="Tanger El Balia">Tanger El Balia</option>
+            <option value="Lakhreb">Lakhreb</option>
+            <option value="Malloussa">Malloussa</option>
+            <option value="Ain El Hamra">Ain El Hamra</option>
+            <option value="Ain Saiid">Ain Saiid</option>
+            <option value="Grand Socco">Grand Socco</option>
+            <option value="Place du Grand 9 Avril 1947">Place du Grand 9 Avril 1947</option>
+            <option value="Musée de la Kasbah">Musée de la Kasbah</option>
+            <option value="Grottes d'Hercule">Grottes d'Hercule</option>
+            <option value="Café Hafa">Café Hafa</option>
+            <option value="Plage Malabata">Plage Malabata</option>
+            <option value="Théâtre Cervantès">Théâtre Cervantès</option>
+            <option value="Cap Malabata">Cap Malabata</option>
+            <option value="Musée de la Fondation Lorin">Musée de la Fondation Lorin</option>
+            <option value="Parc Rmilat">Parc Rmilat</option>
+            <option value="Café Baba">Café Baba</option>
+            <option value="Palais Mendoub">Palais Mendoub</option>
+            <option value="Bibliothèque Nationale du Royaume du Maroc - Délégation de Tanger">Bibliothèque Nationale du Royaume du Maroc - Délégation de Tanger</option>
+            <option value="Musée de la Kasbah">Musée de la Kasbah</option>
+        </select> <br />
+        <a asp-area="" asp-controller="Home" asp-action="Map" class="btn btn-primary">Go to Maps</a>
         <label for="category">Category:</label>
         <select id="category" name="category" required>
             <option value="">Select a category</option>
@@ -116,49 +130,35 @@
 
         <input type="submit" value="Submit">
     </form>
-
-    <script>
-        document.getElementById('issueForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Collect form data
-            var formData = new FormData(this);
-            var issueData = {
-                location: formData.get('location'),
-                category: formData.get('category'),
-                description: formData.get('description'),
-                severity: formData.get('severity')
-            };
-
-            // Send the issueData to the server for processing
-            submitIssueData(issueData);
-        });
-
-        function submitIssueData(issueData) {
-            // Perform an AJAX request to the server to send the issueData
-            // You can use libraries like fetch or jQuery.ajax for this purpose
-            // Example using fetch:
-            fetch('/report-issue', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(issueData)
-            })
-                .then(function (response) {
-                    if (response.ok) {
-                        alert('Issue report submitted successfully!');
-                        // Optionally, reset the form after successful submission
-                        document.getElementById('issueForm').reset();
-                    } else {
-                        alert('Failed to submit issue report. Please try again.');
-                    }
-                })
-                .catch(function (error) {
-                    console.error('Error:', error);
-                    alert('An error occurred while submitting the issue report.');
-                });
-        }
-    </script>
 </body>
+    <script>
+        // Fetch JSON data from file
+        fetch('~/json/pollution_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const pollutionData = data;
+
+                const locationSelect = document.getElementById('locationSelect');
+                const categorySelect = document.getElementById('categorySelect');
+
+                // Populate location options
+                pollutionData.Locations.forEach((location) => {
+                    const option = document.createElement('option');
+                    option.value = location.location_id;
+                    option.textContent = location.name;
+                    locationSelect.appendChild(option);
+                });
+
+                // Populate category options
+                pollutionData.Categories.forEach((category) => {
+                    const option = document.createElement('option');
+                    option.value = category.category_id;
+                    option.textContent = category.name;
+                    categorySelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+    </script>
 </html>
