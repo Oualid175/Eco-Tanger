@@ -10,4 +10,5 @@ namespace Eco_Tanger.Models
         public List<WaterWaste> WaterWaste { get; set; }
         public List<ForestPollution> ForestPollution { get; set; }
     }
+
 }

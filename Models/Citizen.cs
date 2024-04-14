@@ -2,19 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Eco_Tanger.Models
+public class Citizen : IdentityUser
 {
-    public class Citizen
-    {
-        [Key]
-        public string CitizenId { get; set; }
-
-        public ApplicationUser? User { get; set; }
-
-        public string? FirstName { get; set; }
-
-        public string? LastName { get; set; }
-
-        public Citizen() { }
-    }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Address { get; set; }
+    public string City { get; set; }
+    public string Country { get; set; }
+    public string PostalCode { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string Gender { get; set; }
 }
