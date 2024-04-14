@@ -9,271 +9,96 @@
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
-    <h2>Air and Water, Forest Quality in Tanger</h2>
 
+    <h2>Air and Water, Forest Quality in Tanger</h2>
+    <input type="file" id="dataFile" accept=".json" />
     <div id="airChartContainer" style="height: 300px; width: 100%;"></div>
     <div id="waterChartContainer" style="height: 300px; width: 100%;"></div>
     <div id="forestChartContainer" style="height: 300px; width: 100%;"></div>
 
     <script>
-        // Retrieve the JSON data
-        var jsonData = {
-            "City": {
-                "city_id": 1,
-                "city_name": "Tangier",
-                "country": "Morocco"
-            },
-            "Locations": [
-                {
-                    "location_id": 1,
-                    "city_id": 1,
-                    "latitude": 35.7595,
-                    "longitude": -5.833,
-                    "address": "Downtown Tangier"
-                },
-                {
-                    "location_id": 2,
-                    "city_id": 1,
-                    "latitude": 35.7821,
-                    "longitude": -5.7998,
-                    "address": "Port of Tangier-Med"
-                },
-                {
-                    "location_id": 3,
-                    "city_id": 1,
-                    "latitude": 35.7674,
-                    "longitude": -5.7991,
-                    "address": "Tangier Beach"
-                },
-                {
-                    "location_id": 4,
-                    "city_id": 1,
-                    "latitude": 35.7803,
-                    "longitude": -5.8126,
-                    "address": "Tangier City Mall"
-                },
-                {
-                    "location_id": 5,
-                    "city_id": 1,
-                    "latitude": 35.7629,
-                    "longitude": -5.8122,
-                    "address": "Tangier American School"
-                },
-                {
-                    "location_id": 6,
-                    "city_id": 1,
-                    "latitude": 35.7712,
-                    "longitude": -5.7934,
-                    "address": "Tangier Corniche"
-                },
-                {
-                    "location_id": 7,
-                    "city_id": 1,
-                    "latitude": 35.7631,
-                    "longitude": -5.8258,
-                    "address": "Mendoubia Gardens"
-                },
-                {
-                    "location_id": 8,
-                    "city_id": 1,
-                    "latitude": 35.7747,
-                    "longitude": -5.8125,
-                    "address": "Tangier Municipal Beach"
-                },
-                {
-                    "location_id": 9,
-                    "city_id": 1,
-                    "latitude": 35.7782,
-                    "longitude": -5.8002,
-                    "address": "Grand Stade de Tanger"
-                },
-                {
-                    "location_id": 10,
-                    "city_id": 1,
-                    "latitude": 35.7809,
-                    "longitude": -5.8111,
-                    "address": "Tangier Science School"
-                }
-            ],
-            "AirPollution": [
-                {
-                    "airpollution_id": 4,
-                    "location_id": 4,
-                    "pollutant": "CO",
-                    "pollutant_level": "High",
-                    "timestamp": "2024-03-05T08:30:00Z"
-                },
-                {
-                    "airpollution_id": 5,
-                    "location_id": 5,
-                    "pollutant": "SO2",
-                    "pollutant_level": "Medium",
-                    "timestamp": "2024-03-05T09:45:00Z"
-                },
-                {
-                    "airpollution_id": 6,
-                    "location_id": 6,
-                    "pollutant": "NOx",
-                    "pollutant_level": "Low",
-                    "timestamp": "2024-03-05T11:00:00Z"
-                },
-                {
-                    "airpollution_id": 7,
-                    "location_id": 7,
-                    "pollutant": "Particulate Matter",
-                    "pollutant_level": "High",
-                    "timestamp": "2024-03-05T12:15:00Z"
-                },
-                {
-                    "airpollution_id": 8,
-                    "location_id": 8,
-                    "pollutant": "VOCs",
-                    "pollutant_level": "Medium",
-                    "timestamp": "2024-03-05T13:30:00Z"
-                },
-                {
-                    "airpollution_id": 9,
-                    "location_id": 9,
-                    "pollutant": "NH3",
-                    "pollutant_level": "Low",
-                    "timestamp": "2024-03-05T14:45:00Z"
-                },
-                {
-                    "airpollution_id": 10,
-                    "location_id": 10,
-                    "pollutant": "Ozone",
-                    "pollutant_level": "Medium",
-                    "timestamp": "2024-03-05T16:00:00Z"
-                }
-            ],
-            "WaterWaste": [
-                {
-                    "waterwaste_id": 3,
-                    "location_id": 7,
-                    "waste_type": "Plastic Waste",
-                    "waste_volume": "6000 liters",
-                    "timestamp": "2024-03-05T09:30:00Z"
-                },
-                {
-                    "waterwaste_id": 4,
-                    "location_id": 8,
-                    "waste_type": "Sewage",
-                    "waste_volume": "4000 liters",
-                    "timestamp": "2024-03-05T10:45:00Z"
-                },
-                {
-                    "waterwaste_id": 5,
-                    "location_id": 9,
-                    "waste_type": "Chemical Waste",
-                    "waste_volume": "7000 liters",
-                    "timestamp": "2024-03-05T12:00:00Z"
-                },
-                {
-                    "waterwaste_id": 6,
-                    "location_id": 10,
-                    "waste_type": "Oil Spill",
-                    "waste_volume": "20000 liters",
-                    "timestamp": "2024-03-05T13:15:00Z"
-                }
-            ],
-            "ForestPollution": [
-                {
-                    "forestpollution_id": 3,
-                    "location_id": 4,
-                    "pollutant": "Wildfire",
-                    "severity": "High",
-                    "timestamp": "2024-03-05T10:00:00Z"
-                },
-                {
-                    "forestpollution_id": 4,
-                    "location_id": 5,
-                    "pollutant": "Land Degradation",
-                    "severity": "Medium",
-                    "timestamp": "2024-03-05T11:15:00Z"
-                },
-                {
-                    "forestpollution_id": 5,
-                    "location_id": 6,
-                    "pollutant": "Illegal Logging",
-                    "severity": "Low",
-                    "timestamp": "2024-03-05T12:30:00Z"
-                },
-                {
-                    "forestpollution_id": 6,
-                    "location_id": 7,
-                    "pollutant": "Polluted Runoff",
-                    "severity": "Medium",
-                    "timestamp": "2024-03-05T13:45:00Z"
-                },
-                {
-                    "forestpollution_id": 7,
-                    "location_id": 8,
-                    "pollutant": "Deforestation",
-                    "severity": "Low",
-                    "timestamp": "2024-03-05T15:00:00Z"
-                }
-            ]
-        };
+        document.getElementById('dataFile').addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
 
-        // Extract the air pollution data
-        const airData = jsonData.AirPollution.map(item => ({
-            label: item.pollutant,
-            y: item.pollutant_level === 'High' ? 3 :
-                item.pollutant_level === 'Medium' ? 2 : 1
-        }));
+            reader.onload = function (e) {
+                var jsonData = JSON.parse(e.target.result);
 
-        // Extract the water waste data
-        var waterData = [];
-        jsonData.WaterWaste.forEach(function (item) {
-            var dataPoint = {
-                x: new Date(item.timestamp),
-                y: parseInt(item.waste_volume)
+                // Extract the air pollution data
+                const airData = jsonData.AirPollution.map(item => ({
+                    label: item.pollutant,
+                    y: item.pollutant_level === 'High' ? 3 :
+                        item.pollutant_level === 'Medium' ? 2 : 1
+                }));
+
+                // Extract the water waste data
+                var waterData = [];
+                jsonData.WaterWaste.forEach(function (item) {
+                    var dataPoint = {
+                        x: new Date(item.timestamp),
+                        y: parseInt(item.waste_volume)
+                    };
+                    waterData.push(dataPoint);
+                });
+
+                // Extract the forest pollution data
+                const forestData = jsonData.ForestPollution.map(item => ({
+                    label: item.pollutant,
+                    y: item.severity === 'High' ? 3 :
+                        item.severity === 'Medium' ? 2 : 1
+                }));
+
+                // Create the air quality chart
+                const airChart = new CanvasJS.Chart("airChartContainer", {
+                    title: { text: "Air Quality" },
+                    axisY: { title: "Pollutant Level", interval: 1, maximum: 3 },
+                    data: [{ type: "column", dataPoints: airData }]
+                });
+                airChart.render();
+
+                // Create the water quality chart
+                var waterChart = new CanvasJS.Chart("waterChartContainer", {
+                    title: {
+                        text: "Water Quality"
+                    },
+                    axisX: {
+                        title: "Timestamp",
+                        valueFormatString: "MMM DD, YYYY HH:mm"
+                    },
+                    axisY: {
+                        title: "Waste Volume (liters)"
+                    },
+                    data: [{
+                        type: "column",
+                        dataPoints: waterData
+                    }]
+                });
+                waterChart.render();
+
+                // Create the forest quality chart
+                const forestChart = new CanvasJS.Chart("forestChartContainer", {
+                    title: { text: "Forest Quality" },
+                    axisY: { title: "Severity Level", interval: 1, maximum: 3 },
+                    data: [{ type: "column", dataPoints: forestData }]
+                });
+                forestChart.render();
+
+                // Save the file to the server
+                var formData = new FormData();
+                formData.append('file', file);
+
+                fetch('/Charts/Upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('File saved successfully.');
+                    })
+                    .catch(error => console.error('Error:', error));
             };
-            waterData.push(dataPoint);
+            reader.readAsText(file);
         });
-
-        // Extract the forest pollution data
-        const forestData = jsonData.ForestPollution.map(item => ({
-            label: item.pollutant,
-            y: item.severity === 'High' ? 3 :
-                item.severity === 'Medium' ? 2 : 1
-        }));
-
-        // Create the air quality chart
-        const airChart = new CanvasJS.Chart("airChartContainer", {
-            title: { text: "Air Quality" },
-            axisY: { title: "Pollutant Level", interval: 1, maximum: 3 },
-            data: [{ type: "column", dataPoints: airData }]
-        });
-        airChart.render();
-
-        // Create the water quality chart
-        var waterChart = new CanvasJS.Chart("waterChartContainer", {
-            title: {
-                text: "Water Quality"
-            },
-            axisX: {
-                title: "Timestamp",
-                valueFormatString: "MMM DD, YYYY HH:mm"
-            },
-            axisY: {
-                title: "Waste Volume (liters)"
-            },
-            data: [{
-                type: "column",
-                dataPoints: waterData
-            }]
-        });
-        waterChart.render();
-
-        // Create the forest quality chart
-        const forestChart = new CanvasJS.Chart("forestChartContainer", {
-            title: { text: "Forest Quality" },
-            axisY: { title: "Severity Level", interval: 1, maximum: 3 },
-            data: [{ type: "column", dataPoints: forestData }]
-        });
-        forestChart.render();
-
     </script>
 </body>
 </html>

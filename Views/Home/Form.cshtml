@@ -1,0 +1,164 @@
+﻿@{
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Environmental Issue Report</title>
+    <style>
+        /* Basic styling for the form */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            color: #008000;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Environmental Issue Report</h1>
+    <form id="issueForm">
+        <label for="location">Location:</label>
+        <input type="hidden" id="location" name="location" required>
+        <select id="location" name="location" required>
+            <option value="">Select a location</option>
+            <option value="Boukhalef">Boukhalef</option>
+            <option value="Jbila">Jbila</option>
+            <option value="Cap Spartel">Cap Spartel</option>
+            <option value="Achakkar">Achakkar</option>
+            <option value="Tanger El Balia">Tanger El Balia</option>
+            <option value="Lakhreb">Lakhreb</option>
+            <option value="Malloussa">Malloussa</option>
+            <option value="Ain El Hamra">Ain El Hamra</option>
+            <option value="Ain Saiid">Ain Saiid</option>
+            <option value="Grand Socco">Grand Socco</option>
+            <option value="Place du Grand 9 Avril 1947">Place du Grand 9 Avril 1947</option>
+            <option value="Musée de la Kasbah">Musée de la Kasbah</option>
+            <option value="Grottes d'Hercule">Grottes d'Hercule</option>
+            <option value="Café Hafa">Café Hafa</option>
+            <option value="Plage Malabata">Plage Malabata</option>
+            <option value="Théâtre Cervantès">Théâtre Cervantès</option>
+            <option value="Cap Malabata">Cap Malabata</option>
+            <option value="Musée de la Fondation Lorin">Musée de la Fondation Lorin</option>
+            <option value="Parc Rmilat">Parc Rmilat</option>
+            <option value="Café Baba">Café Baba</option>
+            <option value="Palais Mendoub">Palais Mendoub</option>
+            <option value="Bibliothèque Nationale du Royaume du Maroc - Délégation de Tanger">Bibliothèque Nationale du Royaume du Maroc - Délégation de Tanger</option>
+            <option value="Musée de la Kasbah">Musée de la Kasbah</option>
+        </select> <br />
+        <a asp-area="" asp-controller="Home" asp-action="Map" class="btn btn-primary">Go to Maps</a>
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="">Select a category</option>
+            <option value="waterwaste">Water Waste</option>
+            <option value="airpollution">Air Pollution</option>
+            <option value="forestpollution">Forest Pollution</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <label for="severity">Severity:</label>
+        <input type="number" id="severity" name="severity" min="1" max="10" required>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+    <script>
+        // Fetch JSON data from file
+        fetch('~/json/pollution_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const pollutionData = data;
+
+                const locationSelect = document.getElementById('locationSelect');
+                const categorySelect = document.getElementById('categorySelect');
+
+                // Populate location options
+                pollutionData.Locations.forEach((location) => {
+                    const option = document.createElement('option');
+                    option.value = location.location_id;
+                    option.textContent = location.name;
+                    locationSelect.appendChild(option);
+                });
+
+                // Populate category options
+                pollutionData.Categories.forEach((category) => {
+                    const option = document.createElement('option');
+                    option.value = category.category_id;
+                    option.textContent = category.name;
+                    categorySelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+    </script>
+</html>
