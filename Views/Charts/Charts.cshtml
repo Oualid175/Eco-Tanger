@@ -1,17 +1,44 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Hosting
+@using System.IO
+@inject IWebHostEnvironment HostingEnvironment
 
+@{
+    var user = Context.User;
+    var isAdmin = user.IsInRole("Admin");
+    string jsonFolderPath = HostingEnvironment.ContentRootPath + "/wwwroot/json";
+    var jsonFiles = Directory.GetFiles(jsonFolderPath, "*.json");
 }
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Charts for Air, Water and Forest Quality in Tanger</title>
+    <link rel="stylesheet" type="text/css" href="~/css/chart-style.css">
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
+
 <body>
 
     <h2>Air and Water, Forest Quality in Tanger</h2>
-    <input type="file" id="dataFile" accept=".json" />
+    @if (isAdmin)
+    {
+        <input type="file" id="dataFile" accept=".json" class="green-button" />
+    }
+
+    <div class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown()">
+            Quarter
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div id="myDropdown" class="dropdown-content">
+            @foreach (var jsonFile in jsonFiles)
+            {
+                var fileName = System.IO.Path.GetFileName(jsonFile);
+                <a href="/json/@fileName">@fileName</a>
+            }
+        </div>
+    </div>
+
     <div id="airChartContainer" style="height: 300px; width: 100%;"></div>
     <div id="waterChartContainer" style="height: 300px; width: 100%;"></div>
     <div id="forestChartContainer" style="height: 300px; width: 100%;"></div>
@@ -96,9 +123,17 @@
                         console.log('File saved successfully.');
                     })
                     .catch(error => console.error('Error:', error));
+
+                // Load the charts based on the uploaded file
+                loadChart(jsonData);
             };
             reader.readAsText(file);
         });
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
     </script>
 </body>
 </html>

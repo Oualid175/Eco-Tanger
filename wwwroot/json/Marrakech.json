@@ -1,0 +1,113 @@
+{
+  "City": {
+    "city_id": 2,
+    "city_name": "Marrakech",
+    "country": "Morocco"
+  },
+  "Locations": [
+    {
+      "location_id": 11,
+      "city_id": 2,
+      "latitude": 31.6295,
+      "longitude": -7.9811,
+      "address": "Medina"
+    },
+    {
+      "location_id": 12,
+      "city_id": 2,
+      "latitude": 31.6321,
+      "longitude": -7.9898,
+      "address": "Jardin Majorelle"
+    },
+    {
+      "location_id": 13,
+      "city_id": 2,
+      "latitude": 31.6186,
+      "longitude": -7.9891,
+      "address": "Bahia Palace"
+    },
+    {
+      "location_id": 14,
+      "city_id": 2,
+      "latitude": 31.6203,
+      "longitude": -7.9926,
+      "address": "Koutoubia Mosque"
+    },
+    {
+      "location_id": 15,
+      "city_id": 2,
+      "latitude": 31.6329,
+      "longitude": -7.9922,
+      "address": "Marrakech Museum"
+    }
+  ],
+  "AirPollution": [
+    {
+      "airpollution_id": 11,
+      "location_id": 11,
+      "pollutant": "CO2",
+      "pollutant_level": "Medium",
+      "timestamp": "2024-03-05T08:30:00Z"
+    },
+    {
+      "airpollution_id": 12,
+      "location_id": 12,
+      "pollutant": "NO2",
+      "pollutant_level": "Low",
+      "timestamp": "2024-03-05T09:45:00Z"
+    },
+    {
+      "airpollution_id": 13,
+      "location_id": 13,
+      "pollutant": "PM10",
+      "pollutant_level": "High",
+      "timestamp": "2024-03-05T11:00:00Z"
+    }
+  ],
+  "WaterWaste": [
+    {
+      "waterwaste_id": 7,
+      "location_id": 12,
+      "waste_type": "Plastic Waste",
+      "waste_volume": "5000 liters",
+      "timestamp": "2024-03-05T09:30:00Z"
+    },
+    {
+      "waterwaste_id": 8,
+      "location_id": 13,
+      "waste_type": "Sewage",
+      "waste_volume": "3000 liters",
+      "timestamp": "2024-03-05T10:45:00Z"
+    },
+    {
+      "waterwaste_id": 9,
+      "location_id": 14,
+      "waste_type": "Chemical Waste",
+      "waste_volume": "4000 liters",
+      "timestamp": "2024-03-05T12:00:00Z"
+    }
+  ],
+  "ForestPollution": [
+    {
+      "forestpollution_id": 8,
+      "location_id": 11,
+      "pollutant": "Wildfire",
+      "severity": "Low",
+      "timestamp": "2024-03-05T10:00:00Z"
+    },
+    {
+      "forestpollution_id": 9,
+      "location_id": 12,
+      "pollutant": "Land Degradation",
+      "severity": "Medium",
+      "timestamp": "2024-03-05T11:15:00Z"
+    },
+    {
+      "forestpollution_id": 10,
+      "location_id": 13,
+      "pollutant": "Illegal Dumping",
+      "severity": "High",
+      "timestamp": "2024-03-05T12:30:00Z"
+    }
+  ]
+}
